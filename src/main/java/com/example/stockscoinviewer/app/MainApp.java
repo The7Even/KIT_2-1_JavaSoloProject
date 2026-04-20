@@ -17,13 +17,12 @@ public class MainApp extends Application {
     public void start(Stage stage) {
 
         BithumbService service = new BithumbService(); // 빗썸 API 적용
-        MainView view = new MainView(); // ui.MainView (UI 세팅)
+        MainView view = new MainView(stage); // ui.MainView (UI 세팅)
         MainController controller = new MainController(service);
 
-        VBox root = view.createView(stage);
         controller.init(view);
 
-        Scene scene = new Scene(root, 300, 230);
+        Scene scene = new Scene(view, 300, 300);
         scene.getStylesheets().add(getClass()
                 .getResource("/com/example/stockscoinviewer/ui/styles.css")
                 .toExternalForm());

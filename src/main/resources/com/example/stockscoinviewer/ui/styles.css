@@ -44,3 +44,8 @@
     -fx-border-color: #444;
     -fx-border-width: 0 0 1 0;
 }
+
+.TabStyle {
+    -fx-padding: 10;
+    -fx-background-color: #1e1e1e
+}

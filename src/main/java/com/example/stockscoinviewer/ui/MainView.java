@@ -1,33 +1,87 @@
 package com.example.stockscoinviewer.ui;
 
+import com.example.stockscoinviewer.ui.typeView.CryptoView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class MainView {
+import javax.swing.*;
 
-    public TextField input = new TextField();
-    public Button button = new Button("조회");
-    public Label resultLabel = new Label("현재 가격이 여기에 표시됩니다.");
+public class MainView extends BorderPane {
 
-    public Label top1 = new Label();
-    public Label top2 = new Label();
-    public Label top3 = new Label();
-    public Label lastUpdate = new Label("마지막 갱신 : -");
+    private StackPane contentArea;
 
-    public VBox createView(Stage stage) {
+    public MainView(Stage stage) {
+        initialize(stage);
+    }
+
+    private CryptoView cryptoView;
+    public CryptoView getCryptoView() {
+        return cryptoView;
+    }
+
+    private void initialize(Stage stage) {
+        TopTabBar topTabBar = new TopTabBar();
+        cryptoView = new CryptoView();
+
+        contentArea = new StackPane();
+
+        Pane domesticView = new Pane();
+        Pane globalView = new Pane();
+        Pane searchView = new Pane();
+
+        contentArea.getChildren().addAll(domesticView, globalView, cryptoView, searchView);
+
+        showView(domesticView);
+
+        topTabBar.setTabChangeListener(type -> {
+            switch (type) {
+                case DOMESTIC:
+                    showView(domesticView);
+                    break;
+                case GLOBAL:
+                    showView(globalView);
+                    break;
+                case CRYPTO:
+                    showView(cryptoView);
+                    break;
+                case SEARCH:
+                    showView(searchView);
+                    break;
+            }
+        });
 
         stage.initStyle(StageStyle.UNDECORATED);
 
+        HBox titleBar = createTitleBar(stage);
+
+        HBox searchBox = new HBox(5, input, button);
+        searchBox.setAlignment(Pos.CENTER_LEFT);
+
+        VBox Display = new VBox(titleBar, searchBox, topTabBar);
+        VBox TabBox = new VBox(contentArea, lastUpdate);
+        this.setTop(Display);
+        this.setCenter(TabBox);
+    }
+
+    private void showView(Pane tr) {
+        for (Node node : contentArea.getChildren()) {
+            node.setVisible(false);
+        }
+        tr.setVisible(true);
+    }
+
+    public TextField input = new TextField();
+    public Button button = new Button("조회");
+    public Label lastUpdate = new Label("마지막 갱신 : -");
+
+    private HBox createTitleBar(Stage stage) {
         Button closeBtn = new Button("×");
         Button minBtn = new Button("_");
         Label titleLabel = new Label("Stocks & Coins Price Tracker");
@@ -61,18 +115,6 @@ public class MainView {
         closeBtn.setOnAction(e -> stage.close());
         minBtn.setOnAction(e -> stage.setIconified(true));
 
-        HBox searchBox = new HBox(5, input, button);
-        searchBox.setAlignment(Pos.CENTER_LEFT);
-
-        VBox root = new VBox(
-                titleBar,
-                searchBox, resultLabel,
-                new Separator(),
-                new Label("거래량 Top 3"),
-                top1, top2, top3,
-                lastUpdate
-        );
-
-        return root;
+        return  titleBar;
     }
 }
