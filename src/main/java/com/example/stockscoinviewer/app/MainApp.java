@@ -26,6 +26,9 @@ public class MainApp extends Application {
         scene.getStylesheets().add(getClass()
                 .getResource("/com/example/stockscoinviewer/ui/styles.css")
                 .toExternalForm());
+        scene.getStylesheets().add(
+                getClass().getResource("/com/example/stockscoinviewer/ui/tabui.css").toExternalForm()
+        );
 
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);

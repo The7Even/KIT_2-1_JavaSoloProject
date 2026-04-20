@@ -28,10 +28,14 @@ public class MainView extends BorderPane {
 
     private void initialize(Stage stage) {
         TopTabBar topTabBar = new TopTabBar();
+        // domesticView = new DomesticView();
+        // globalView = new GlobalView();
         cryptoView = new CryptoView();
+        // searchView = new SearchView();
 
         contentArea = new StackPane();
 
+        // 각 Ui 탭 개발 완료하면 삭제
         Pane domesticView = new Pane();
         Pane globalView = new Pane();
         Pane searchView = new Pane();

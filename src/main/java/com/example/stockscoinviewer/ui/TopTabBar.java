@@ -3,6 +3,7 @@ package com.example.stockscoinviewer.ui;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,12 @@ public class TopTabBar extends HBox {
     private void createTab(String name, TabType type) {
         ToggleButton btn = new ToggleButton(name);
         btn.setToggleGroup(toggleGroup);
+
+        btn.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+           if (btn.isSelected()) {
+               e.consume();
+           }
+        });
 
         btn.setOnAction(e -> {
             if (listener != null) {
