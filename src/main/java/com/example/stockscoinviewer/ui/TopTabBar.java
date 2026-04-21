@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TopTabBar extends HBox {
+    private TopTabBar topTabBar;
+    public TopTabBar getTopTabBar() { return topTabBar; }
+    private TabType currentTab;
+    public TabType getCurrentTab() { return currentTab; }
     private ToggleGroup toggleGroup = new ToggleGroup();
     private Map<TabType, ToggleButton> tabButtons = new HashMap<>();
 
@@ -26,6 +30,7 @@ public class TopTabBar extends HBox {
         createTab("검색", TabType.SEARCH);
 
         tabButtons.get(TabType.DOMESTIC).setSelected(true);
+        currentTab = TabType.DOMESTIC;
     }
 
     private void createTab(String name, TabType type) {
@@ -39,6 +44,8 @@ public class TopTabBar extends HBox {
         });
 
         btn.setOnAction(e -> {
+            currentTab = type;
+
             if (listener != null) {
                 listener.onTabChanged(type);
             }

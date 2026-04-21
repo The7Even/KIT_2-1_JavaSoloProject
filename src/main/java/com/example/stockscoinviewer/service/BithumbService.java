@@ -13,7 +13,7 @@ import com.example.stockscoinviewer.model.CoinPrice;
 
 public class BithumbService {
 
-    public CoinPrice getCoinPrice(String coin) {
+    public static CoinPrice getCoinPrice(String coin) {
         try {
             String url = "https://api.bithumb.com/public/ticker/" + coin + "_KRW";
 

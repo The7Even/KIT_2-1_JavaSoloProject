@@ -1,6 +1,10 @@
 package com.example.stockscoinviewer.ui;
 
+import com.example.stockscoinviewer.controller.MainController;
+import com.example.stockscoinviewer.service.BithumbService;
+import com.example.stockscoinviewer.service.DomesticService;
 import com.example.stockscoinviewer.ui.typeView.CryptoView;
+import com.example.stockscoinviewer.ui.typeView.DomesticView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -22,13 +26,20 @@ public class MainView extends BorderPane {
     }
 
     private CryptoView cryptoView;
+    private DomesticView domesticView;
     public CryptoView getCryptoView() {
         return cryptoView;
     }
+    public DomesticView getDomesticView() { return domesticView; }
+
+    private TopTabBar topTabBar;
+    public TopTabBar getTopTabBar() { return topTabBar; }
 
     private void initialize(Stage stage) {
-        TopTabBar topTabBar = new TopTabBar();
-        // domesticView = new DomesticView();
+
+        topTabBar = new TopTabBar();
+
+        domesticView = new DomesticView();
         // globalView = new GlobalView();
         cryptoView = new CryptoView();
         // searchView = new SearchView();
@@ -36,7 +47,6 @@ public class MainView extends BorderPane {
         contentArea = new StackPane();
 
         // 각 Ui 탭 개발 완료하면 삭제
-        Pane domesticView = new Pane();
         Pane globalView = new Pane();
         Pane searchView = new Pane();
 
@@ -65,7 +75,7 @@ public class MainView extends BorderPane {
 
         HBox titleBar = createTitleBar(stage);
 
-        HBox searchBox = new HBox(5, input, button);
+        HBox searchBox = new HBox(5, input, searchButton);
         searchBox.setAlignment(Pos.CENTER_LEFT);
 
         VBox Display = new VBox(titleBar, searchBox, topTabBar);
@@ -82,7 +92,7 @@ public class MainView extends BorderPane {
     }
 
     public TextField input = new TextField();
-    public Button button = new Button("조회");
+    public Button searchButton = new Button("조회");
     public Label lastUpdate = new Label("마지막 갱신 : -");
 
     private HBox createTitleBar(Stage stage) {

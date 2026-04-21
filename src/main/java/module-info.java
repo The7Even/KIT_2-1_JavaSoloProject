@@ -13,6 +13,7 @@ module com.example.stockscoinviewer {
 
     requires org.kordamp.ikonli.fontawesome5;
     requires org.json;
+    requires org.jsoup;
     requires java.net.http;
     requires java.desktop;
 }
