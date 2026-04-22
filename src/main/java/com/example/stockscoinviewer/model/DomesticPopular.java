@@ -11,4 +11,5 @@ public class DomesticPopular {
 
     public String getName() { return name; }
     public String getPrice() { return price; }
+    public String toString() { return name + " " + price; }
 }

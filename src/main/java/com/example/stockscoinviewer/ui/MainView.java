@@ -65,7 +65,7 @@ public class MainView extends BorderPane {
                 case CRYPTO:
                     showView(cryptoView);
                     break;
-                case SEARCH:
+                case SEARCH: // 차후 SEARCH에서 FAVORITE로 변경 가능.
                     showView(searchView);
                     break;
             }

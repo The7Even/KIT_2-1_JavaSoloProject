@@ -22,18 +22,18 @@ public class DomesticService {
         try {
             Document doc = Jsoup.connect(BASE_URL).userAgent("Mozilla/5.0").timeout(5000).get();
 
-            Elements rows = doc.select("tr.up, tr.down");
+            Elements rows = doc.select(".aside_area.aside_popular table tr");
 
-            for(int i = 0; i < 3 && i < rows.size(); i++) {
-                Element row = rows.get(i);
+            for(Element row : rows) {
+
+                if (row.selectFirst("th a") == null) { continue; }
 
                 Element nameEl = row.selectFirst("th a");
-                if (nameEl == null) continue;
 
                 String name = nameEl.text();
 
                 Elements tds = row.select("td");
-                if (tds.isEmpty())  continue;
+                if (tds.size() < 2) { continue; }
 
                 String price = tds.get(0).text();
 
