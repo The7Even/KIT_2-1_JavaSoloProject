@@ -1,8 +1,10 @@
 package com.example.stockscoinviewer.controller;
 
 import com.example.stockscoinviewer.model.DomesticSearch;
+import com.example.stockscoinviewer.model.GlobalSearch;
 import com.example.stockscoinviewer.service.BithumbService;
 import com.example.stockscoinviewer.service.DomesticService;
+import com.example.stockscoinviewer.service.GlobalService;
 import com.example.stockscoinviewer.ui.MainView;
 import com.example.stockscoinviewer.ui.TopTabBar;
 import com.example.stockscoinviewer.ui.TabType;
@@ -18,10 +20,12 @@ public class MainController {
 
     private DomesticService domesticService;
     private BithumbService bithumbService;
+    private GlobalService globalService;
 
-    public MainController(DomesticService domesticService, BithumbService bithumbService) {
+    public MainController(DomesticService domesticService, GlobalService globalService, BithumbService bithumbService) {
         this.domesticService = domesticService;
         this.bithumbService = bithumbService;
+        this.globalService = globalService;
     }
 
     public void init(MainView view) {
@@ -52,7 +56,13 @@ public class MainController {
                             result != null ? result.getName() + ": " + df.format(result.getPrice()) + " KRW" : "조회 실패"
                     );
                 });
-            } // else if (current == TabType.GLOBAL) { } // 미국 주식 조회 기능 추가후 작성
+            } else if (current == TabType.GLOBAL) {
+                List<GlobalSearch> list = GlobalService.SearchStock(keyword);
+
+                Platform.runLater(() -> {
+                    view.getGlobalView().UpdateSearchResult(list);
+                });
+            }
         }).start();
     }
 }

@@ -5,6 +5,7 @@ import com.example.stockscoinviewer.service.BithumbService;
 import com.example.stockscoinviewer.service.DomesticService;
 import com.example.stockscoinviewer.ui.typeView.CryptoView;
 import com.example.stockscoinviewer.ui.typeView.DomesticView;
+import com.example.stockscoinviewer.ui.typeView.GlobalView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -27,10 +28,12 @@ public class MainView extends BorderPane {
 
     private CryptoView cryptoView;
     private DomesticView domesticView;
+    private GlobalView globalView;
     public CryptoView getCryptoView() {
         return cryptoView;
     }
     public DomesticView getDomesticView() { return domesticView; }
+    public GlobalView getGlobalView() { return globalView; }
 
     private TopTabBar topTabBar;
     public TopTabBar getTopTabBar() { return topTabBar; }
@@ -40,14 +43,13 @@ public class MainView extends BorderPane {
         topTabBar = new TopTabBar();
 
         domesticView = new DomesticView();
-        // globalView = new GlobalView();
+        globalView = new GlobalView();
         cryptoView = new CryptoView();
         // searchView = new SearchView();
 
         contentArea = new StackPane();
 
         // 각 Ui 탭 개발 완료하면 삭제
-        Pane globalView = new Pane();
         Pane searchView = new Pane();
 
         contentArea.getChildren().addAll(domesticView, globalView, cryptoView, searchView);
