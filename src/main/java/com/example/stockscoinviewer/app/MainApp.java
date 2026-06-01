@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -21,7 +22,12 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) {
-
+        Font.loadFont(
+                MainApp.class.getResourceAsStream(
+                        "/fonts/Pretendard-SemiBold.otf"
+                ),
+                12
+        );
         BithumbService service = new BithumbService(); // 빗썸 API 적용
         DomesticService domeService = new DomesticService();
         GlobalService globalService = new GlobalService();

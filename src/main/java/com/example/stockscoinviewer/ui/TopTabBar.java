@@ -27,7 +27,7 @@ public class TopTabBar extends HBox {
         createTab("국내", TabType.DOMESTIC);
         createTab("해외", TabType.GLOBAL);
         createTab("가상", TabType.CRYPTO);
-        createTab("검색", TabType.SEARCH);
+        createTab("즐겨찾기", TabType.FAVORITE);
 
         tabButtons.get(TabType.DOMESTIC).setSelected(true);
         currentTab = TabType.DOMESTIC;

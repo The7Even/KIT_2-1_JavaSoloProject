@@ -50,9 +50,9 @@ public class MainView extends BorderPane {
         contentArea = new StackPane();
 
         // 각 Ui 탭 개발 완료하면 삭제
-        Pane searchView = new Pane();
+        Pane favView = new Pane();
 
-        contentArea.getChildren().addAll(domesticView, globalView, cryptoView, searchView);
+        contentArea.getChildren().addAll(domesticView, globalView, cryptoView, favView);
 
         showView(domesticView);
 
@@ -67,8 +67,8 @@ public class MainView extends BorderPane {
                 case CRYPTO:
                     showView(cryptoView);
                     break;
-                case SEARCH: // 차후 SEARCH에서 FAVORITE로 변경 가능.
-                    showView(searchView);
+                case FAVORITE:
+                    showView(favView);
                     break;
             }
         });

@@ -5,6 +5,7 @@ import com.example.stockscoinviewer.ui.MainView;
 import com.example.stockscoinviewer.ui.typeView.DomesticView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -27,6 +28,12 @@ public class DomesticController {
         DomesticView domestic = view.getDomesticView();
 
         updateTop3(view);
+
+        int sec = LocalTime.now().getSecond();
+        int delay = 5 - (sec % 5);
+
+        PauseTransition init = new PauseTransition(Duration.seconds(delay));
+
         Timeline timeline = new Timeline(
                 new KeyFrame(
                         Duration.seconds(5),
@@ -34,12 +41,14 @@ public class DomesticController {
                 )
         );
 
+        init.setOnFinished(e -> timeline.play());
+        init.play();
+
         timeline.setCycleCount(Animation.INDEFINITE);
 
-        timeline.play();
     }
 
-    private void updateTop3(MainView view) {
+    public void updateTop3(MainView view) {
         DomesticView domestic = view.getDomesticView();
 
         new Thread (() -> {

@@ -1,6 +1,6 @@
 .root {
-    -fx-font-family: "Pretendard Semibold";
-    src: url("../resources/fonts/Pretendard-Semibold.otf") format("opentype");
+    -fx-font-family: "Pretendard SemiBold";
+    src: url("../resources/fonts/Pretendard-SemiBold.otf") format("opentype");
     -fx-background-color: #1e1e1e;
     -fx-background-radius: 8;
 

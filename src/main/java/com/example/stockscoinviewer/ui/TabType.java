@@ -4,5 +4,5 @@ public enum TabType {
     DOMESTIC,
     GLOBAL,
     CRYPTO,
-    SEARCH
+    FAVORITE
 }

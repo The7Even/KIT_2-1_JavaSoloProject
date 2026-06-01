@@ -1,5 +1,6 @@
 package com.example.stockscoinviewer.controller;
 
+import com.example.stockscoinviewer.controller.DomesticController;
 import com.example.stockscoinviewer.model.DomesticSearch;
 import com.example.stockscoinviewer.model.GlobalSearch;
 import com.example.stockscoinviewer.service.BithumbService;
@@ -12,6 +13,7 @@ import com.example.stockscoinviewer.ui.typeView.DomesticView;
 import javafx.application.Platform;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {

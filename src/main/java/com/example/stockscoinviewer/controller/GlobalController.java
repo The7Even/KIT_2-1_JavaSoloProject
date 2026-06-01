@@ -5,6 +5,7 @@ import com.example.stockscoinviewer.ui.MainView;
 import com.example.stockscoinviewer.ui.typeView.GlobalView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.util.Duration;
@@ -23,14 +24,21 @@ public class GlobalController {
         GlobalView global = view.getGlobalView();
 
         updateTop3(view);
+
+        int sec = LocalTime.now().getSecond();
+        int delay = 5 - (sec % 5);
+
+        PauseTransition init = new PauseTransition(Duration.seconds(delay));
         Timeline timeline = new Timeline(
                 new KeyFrame(
                         Duration.seconds(5),
                         e -> updateTop3(view)
                 )
         );
+        init.setOnFinished(e -> timeline.play());
+        init.play();
+
         timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
     }
 
     private void updateTop3(MainView view) {
