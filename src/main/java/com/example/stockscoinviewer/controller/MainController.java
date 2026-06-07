@@ -54,6 +54,8 @@ public class MainController {
                 var result = BithumbService.getCoinPrice(keyword);
 
                 Platform.runLater(() -> {
+                    view.getCryptoView().setCurrentCoin(result);
+
                     view.getCryptoView().resultLabel.setText(
                             result != null ? result.getName() + ": " + df.format(result.getPrice()) + " KRW" : "조회 실패"
                     );

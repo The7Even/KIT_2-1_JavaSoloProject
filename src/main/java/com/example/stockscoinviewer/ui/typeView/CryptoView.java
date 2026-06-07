@@ -1,5 +1,6 @@
 package com.example.stockscoinviewer.ui.typeView;
 
+import com.example.stockscoinviewer.model.CoinPrice;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ public class CryptoView extends VBox {
 
     private VBox favoriteBox = new VBox(5);
     private VBox Top3Box = new VBox(5);
+    private CoinPrice currentCoin;
 
     private Label topTitle = new Label("실시간 거래량 Top 3");
 
@@ -27,6 +29,14 @@ public class CryptoView extends VBox {
         Top3Box.getChildren().addAll(topTitle, top1, top2, top3);
 
         this.getChildren().addAll(favoriteBox, new Separator(), Top3Box);
+    }
+
+    public CoinPrice getCurrentCoin() {
+        return currentCoin;
+    }
+
+    public void setCurrentCoin(CoinPrice currentCoin) {
+        this.currentCoin = currentCoin;
     }
 
     public void WriteTop3(String t1, String t2, String t3) {

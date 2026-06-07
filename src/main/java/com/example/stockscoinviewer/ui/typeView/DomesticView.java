@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DomesticView extends VBox {
@@ -18,6 +19,8 @@ public class DomesticView extends VBox {
     public DomesticView() {
         initialize();
     }
+
+    private List<DomesticSearch> currentResults = new ArrayList<>();
 
     private void initialize() {
         this.setSpacing(15);
@@ -37,6 +40,7 @@ public class DomesticView extends VBox {
     }
 
     public void UpdateSearchResult(List<DomesticSearch> list) {
+        currentResults = list;
         String output;
         String[] results = new String[list.size()];
 
@@ -66,4 +70,6 @@ public class DomesticView extends VBox {
     public Label fav3 = new Label();
     public Label fav4 = new Label();
     public Label fav5 = new Label();
+
+    public List<DomesticSearch> getCurrentResults() { return currentResults; }
 }

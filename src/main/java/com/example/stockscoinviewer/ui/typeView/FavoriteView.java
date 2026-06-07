@@ -1,9 +1,12 @@
 package com.example.stockscoinviewer.ui.typeView;
 
+import com.example.stockscoinviewer.model.FavoriteItem;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
+
+import java.util.List;
 
 public class FavoriteView extends VBox {
     private VBox favBox = new VBox(5);
@@ -16,27 +19,27 @@ public class FavoriteView extends VBox {
         this.setSpacing(15);
         this.setPadding(new Insets(15));
 
-        favBox.getChildren().addAll(fav1,fav2,fav3,fav4,fav5);
+        favBox.getChildren().add(favoriteBox);
 
         this.getChildren().addAll(favBox);
     }
 
-    public void UpdateFavorites(String[] favorites)
+    public void UpdateFavorites(List<FavoriteItem> favorites)
     {
-        Label[] labels = {fav1, fav2, fav3, fav4, fav5};
 
-        for (int i = 0; i < labels.length; i++) {
-            if (i < favorites.length) {
-                labels[i].setText(favorites[i]);
-            } else {
-                labels[i].setText("");
-            }
+        favoriteBox.getChildren().clear();
+
+        if(favorites.isEmpty()) {
+            favoriteBox.getChildren().add(new Label("아직 즐겨찾기한 종목이 없습니다."));
+            return;
+        }
+
+        for (FavoriteItem item : favorites) {
+            Label label = new Label(item.getName() + " (" + item.getCode() + ")");
+
+            favoriteBox.getChildren().add(label);
         }
     }
 
-    public Label fav1 = new Label("즐겨찾기에 종목을 추가해 보세요.");
-    public Label fav2 = new Label();
-    public Label fav3 = new Label();
-    public Label fav4 = new Label();
-    public Label fav5 = new Label();
+    private VBox favoriteBox = new VBox(5);
 }

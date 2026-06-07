@@ -16,4 +16,9 @@ public class FavoriteItem {
     public TabType getMarket() { return market; }
     public String getCode() { return code; }
     public String getName() { return name; }
+
+    @Override
+    public String toString() {
+        return market + "," + code + "," + name;
+    }
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalView extends VBox {
@@ -19,6 +20,8 @@ public class GlobalView extends VBox {
     public GlobalView() {
         initialize();
     }
+
+    private List<GlobalSearch> currentResults = new ArrayList<>();
 
     public void SetLabel(Label l) {
         l.setMaxWidth(180);
@@ -43,6 +46,7 @@ public class GlobalView extends VBox {
     }
 
     public void UpdateSearchResult(List<GlobalSearch> list) {
+        currentResults = list;
         String output;
         String[] results = new String[list.size()];
 
@@ -72,5 +76,9 @@ public class GlobalView extends VBox {
     public Label fav3 = new Label();
     public Label fav4 = new Label();
     public Label fav5 = new Label();
+
+    public List<GlobalSearch> getCurrentResults() {
+        return currentResults;
+    }
 
 }
