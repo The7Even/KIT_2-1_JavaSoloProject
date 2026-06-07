@@ -6,6 +6,7 @@ import com.example.stockscoinviewer.controller.GlobalController;
 import com.example.stockscoinviewer.controller.MainController;
 import com.example.stockscoinviewer.service.BithumbService;
 import com.example.stockscoinviewer.service.DomesticService;
+import com.example.stockscoinviewer.service.FavoriteService;
 import com.example.stockscoinviewer.service.GlobalService;
 import com.example.stockscoinviewer.ui.MainView;
 import com.example.stockscoinviewer.ui.TopTabBar;
@@ -31,13 +32,14 @@ public class MainApp extends Application {
         BithumbService service = new BithumbService(); // 빗썸 API 적용
         DomesticService domeService = new DomesticService();
         GlobalService globalService = new GlobalService();
+        FavoriteService favoriteService = new FavoriteService();
         TopTabBar tabBar = new TopTabBar();
         MainView view = new MainView(stage); // ui.MainView (UI 세팅)
         // view.setTopTabBar(tabBar);
         CryptoController crycon = new CryptoController(service);
         DomesticController domecon = new DomesticController(domeService);
         GlobalController globalcon = new GlobalController(globalService);
-        MainController controller = new MainController(domeService, globalService, service);
+        MainController controller = new MainController(domeService, globalService, service, favoriteService);
 
         crycon.init(view);
         domecon.init(view);

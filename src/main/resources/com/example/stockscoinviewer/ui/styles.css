@@ -50,3 +50,15 @@
     -fx-padding: 10;
     -fx-background-color: #1e1e1e
 }
+
+.fav-star {
+    -fx-pref-width: 30;
+    -fx-pref-height: 20;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill : yellow;
+
+    -fx-font-size: 12px;
+
+    -fx-padding: 0 4 0 4;
+}
