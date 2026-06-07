@@ -1,6 +1,8 @@
 package com.example.stockscoinviewer.model;
 
-public class GlobalSearch {
+import com.example.stockscoinviewer.ui.TabType;
+
+public class GlobalSearch implements FavoriteAble {
     private String name;
     private String code;
     private String price;
@@ -16,6 +18,11 @@ public class GlobalSearch {
     public String getName() { return name; }
     public String getPrice() { return price; }
     public String getDiff() { return diff; }
+    @Override
+    public String getCode() { return code; }
+
+    @Override
+    public TabType getMarket() { return TabType.GLOBAL; }
 
     @Override
     public String toString() {

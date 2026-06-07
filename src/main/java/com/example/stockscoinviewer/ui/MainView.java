@@ -5,6 +5,7 @@ import com.example.stockscoinviewer.service.BithumbService;
 import com.example.stockscoinviewer.service.DomesticService;
 import com.example.stockscoinviewer.ui.typeView.CryptoView;
 import com.example.stockscoinviewer.ui.typeView.DomesticView;
+import com.example.stockscoinviewer.ui.typeView.FavoriteView;
 import com.example.stockscoinviewer.ui.typeView.GlobalView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -29,11 +30,13 @@ public class MainView extends BorderPane {
     private CryptoView cryptoView;
     private DomesticView domesticView;
     private GlobalView globalView;
+    private FavoriteView favoriteView;
     public CryptoView getCryptoView() {
         return cryptoView;
     }
     public DomesticView getDomesticView() { return domesticView; }
     public GlobalView getGlobalView() { return globalView; }
+    public FavoriteView getFavoriteView() { return favoriteView; }
 
     private TopTabBar topTabBar;
     public TopTabBar getTopTabBar() { return topTabBar; }
@@ -45,14 +48,11 @@ public class MainView extends BorderPane {
         domesticView = new DomesticView();
         globalView = new GlobalView();
         cryptoView = new CryptoView();
-        // searchView = new SearchView();
+        favoriteView = new FavoriteView();
 
         contentArea = new StackPane();
 
-        // 각 Ui 탭 개발 완료하면 삭제
-        Pane favView = new Pane();
-
-        contentArea.getChildren().addAll(domesticView, globalView, cryptoView, favView);
+        contentArea.getChildren().addAll(domesticView, globalView, cryptoView, favoriteView);
 
         showView(domesticView);
 
@@ -68,7 +68,7 @@ public class MainView extends BorderPane {
                     showView(cryptoView);
                     break;
                 case FAVORITE:
-                    showView(favView);
+                    showView(favoriteView);
                     break;
             }
         });
