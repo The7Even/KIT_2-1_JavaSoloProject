@@ -24,11 +24,12 @@ public class CryptoView extends VBox {
         this.setSpacing(15);
         this.setPadding(new Insets(15));
 
-        favoriteBox.getChildren().add(resultLabel);
+        HBox Result = new HBox(5, favStar, resultLabel);
 
         Top3Box.getChildren().addAll(topTitle, top1, top2, top3);
+        favStar.getStyleClass().add("fav-star");
 
-        this.getChildren().addAll(favoriteBox, new Separator(), Top3Box);
+        this.getChildren().addAll(Result, new Separator(), Top3Box);
     }
 
     public CoinPrice getCurrentCoin() {
@@ -48,5 +49,6 @@ public class CryptoView extends VBox {
     public Label top1 = new Label();
     public Label top2 = new Label();
     public Label top3 = new Label();
+    public Button favStar = new Button("☆");
     public Label resultLabel = new Label("현재 가격이 여기에 표시됩니다.");
 }

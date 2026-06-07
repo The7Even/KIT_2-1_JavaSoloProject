@@ -79,7 +79,7 @@ public class DomesticView extends VBox {
     public Label top2 = new Label();
     public Label top3 = new Label();
     public Label fav1 = new Label("상단 검색 탭을 이용해 검색해주세요.");
-    public Label fav2 = new Label("차후에 이 탭은 즐겨찾기 한 주식이 표시될 예정입니다.");
+    public Label fav2 = new Label("왼쪽에 별을 누르면 즐겨찾기 탭에 저장됩니다.");
     public Label fav3 = new Label();
     public Label fav4 = new Label();
     public Label fav5 = new Label();

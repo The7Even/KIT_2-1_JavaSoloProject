@@ -1,6 +1,7 @@
 package com.example.stockscoinviewer.controller;
 
 import com.example.stockscoinviewer.controller.DomesticController;
+import com.example.stockscoinviewer.model.CoinPrice;
 import com.example.stockscoinviewer.model.DomesticSearch;
 import com.example.stockscoinviewer.model.FavoriteItem;
 import com.example.stockscoinviewer.model.GlobalSearch;
@@ -12,6 +13,7 @@ import com.example.stockscoinviewer.ui.MainView;
 import com.example.stockscoinviewer.ui.TopTabBar;
 import com.example.stockscoinviewer.ui.TabType;
 import com.example.stockscoinviewer.ui.typeView.DomesticView;
+import com.example.stockscoinviewer.ui.typeView.GlobalView;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 
@@ -75,6 +77,7 @@ public class MainController {
 
                 Platform.runLater(() -> {
                     view.getGlobalView().UpdateSearchResult(list);
+                    refreshGlobalFavorite(view);
                 });
             }
         }).start();
@@ -82,11 +85,18 @@ public class MainController {
 
     private void setupFavoriteButton(MainView view) {
         DomesticView domesticView = view.getDomesticView();
+        GlobalView globalView = view.getGlobalView();
+        view.getCryptoView().favStar.setOnAction(e -> toggleCryptoFavorite(view));
         domesticView.star1.setOnAction(e -> toggleDomesticFavorite(view, 0));
         domesticView.star2.setOnAction(e -> toggleDomesticFavorite(view, 1));
         domesticView.star3.setOnAction(e -> toggleDomesticFavorite(view, 2));
         domesticView.star4.setOnAction(e -> toggleDomesticFavorite(view, 3));
         domesticView.star5.setOnAction(e -> toggleDomesticFavorite(view, 4));
+        globalView.star1.setOnAction(e -> toggleGlobalFavorite(view, 0));
+        globalView.star2.setOnAction(e -> toggleGlobalFavorite(view, 1));
+        globalView.star3.setOnAction(e -> toggleGlobalFavorite(view, 2));
+        globalView.star4.setOnAction(e -> toggleGlobalFavorite(view, 3));
+        globalView.star5.setOnAction(e -> toggleGlobalFavorite(view, 4));
     }
 
     private void toggleDomesticFavorite(MainView view, int index) {
@@ -114,6 +124,45 @@ public class MainController {
         refreshDomesticFavorite(view);
     }
 
+    private void toggleGlobalFavorite(MainView view, int index) {
+        GlobalView globalView = view.getGlobalView();
+
+        if (index >= globalView.getCurrentResults().size()) { return; }
+
+        GlobalSearch stock = globalView.getCurrentResults().get(index);
+
+        FavoriteItem item = new FavoriteItem(TabType.GLOBAL, stock.getCode(), stock.getName());
+        boolean favorite = favoriteService.toggleFavorite(item);
+
+        Button button = switch (index)
+        {
+            case 0 -> globalView.star1;
+            case 1 -> globalView.star2;
+            case 2 -> globalView.star3;
+            case 3 -> globalView.star4;
+            default -> globalView.star5;
+        };
+
+        button.setText(favorite ? "★" : "☆");
+
+        view.getFavoriteView().UpdateFavorites(favoriteService.getFavorites());
+        refreshGlobalFavorite(view);
+    }
+
+    private void toggleCryptoFavorite(MainView view) {
+        CoinPrice coin = view.getCryptoView().getCurrentCoin();
+
+        if (coin == null) { return; }
+
+        FavoriteItem item = new FavoriteItem(TabType.CRYPTO, coin.getCode(), coin.getName());
+
+        boolean favorite = favoriteService.toggleFavorite(item);
+
+        view.getCryptoView().favStar.setText(favorite ? "★" : "☆");
+
+        view.getFavoriteView().UpdateFavorites(favoriteService.getFavorites());
+    }
+
     private void refreshDomesticFavorite(MainView view) {
         DomesticView domesticView = view.getDomesticView();
 
@@ -126,6 +175,25 @@ public class MainController {
                 DomesticSearch stock = list.get(i);
 
                 boolean favorite = favoriteService.isFavorite(TabType.DOMESTIC, stock.getCode());
+
+                stars[i].setText(favorite ?  "★" : "☆");
+            }
+            else {stars[i].setText("☆");}
+        }
+    }
+
+    private void refreshGlobalFavorite(MainView view) {
+        GlobalView globalView = view.getGlobalView();
+
+        List<GlobalSearch> list = globalView.getCurrentResults();
+
+        Button[] stars = {globalView.star1, globalView.star2, globalView.star3, globalView.star4, globalView.star5};
+
+        for (int i = 0; i < stars.length; i++) {
+            if (i < list.size()) {
+                GlobalSearch stock = list.get(i);
+
+                boolean favorite = favoriteService.isFavorite(TabType.GLOBAL, stock.getCode());
 
                 stars[i].setText(favorite ?  "★" : "☆");
             }

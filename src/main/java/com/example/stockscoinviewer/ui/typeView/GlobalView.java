@@ -2,9 +2,11 @@ package com.example.stockscoinviewer.ui.typeView;
 
 import com.example.stockscoinviewer.model.GlobalSearch;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.Separator;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -32,9 +34,18 @@ public class GlobalView extends VBox {
         this.setSpacing(15);
         this.setPadding(new Insets(15));
 
-        favoriteBox.getChildren().addAll(fav1, fav2, fav3, fav4, fav5);
-
+        HBox row1 = new HBox(5, star1, fav1);
+        HBox row2 = new HBox(5, star2, fav2);
+        HBox row3 = new HBox(5, star3, fav3);
+        HBox row4 = new HBox(5, star4, fav4);
+        HBox row5 = new HBox(5, star5, fav5);
+        favoriteBox.getChildren().addAll(row1, row2, row3, row4, row5);
         Top3Box.getChildren().addAll(topTitle, top1, top2, top3);
+        star1.getStyleClass().add("fav-star");
+        star2.getStyleClass().add("fav-star");
+        star3.getStyleClass().add("fav-star");
+        star4.getStyleClass().add("fav-star");
+        star5.getStyleClass().add("fav-star");
 
         this.getChildren().addAll(favoriteBox, new Separator(), Top3Box);
     }
@@ -72,10 +83,15 @@ public class GlobalView extends VBox {
     public Label top2 = new Label();
     public Label top3 = new Label();
     public Label fav1 = new Label("상단 검색 탭을 이용해 검색해주세요.");
-    public Label fav2 = new Label("차후에 이 탭은 즐겨찾기 한 주식이 표시될 예정입니다.");
+    public Label fav2 = new Label("왼쪽의 별을 누르면 즐겨찾기 탭에 저장됩니다.");
     public Label fav3 = new Label();
     public Label fav4 = new Label();
     public Label fav5 = new Label();
+    public Button star1 = new Button("☆");
+    public Button star2 = new Button("☆");
+    public Button star3 = new Button("☆");
+    public Button star4 = new Button("☆");
+    public Button star5 = new Button("☆");
 
     public List<GlobalSearch> getCurrentResults() {
         return currentResults;
